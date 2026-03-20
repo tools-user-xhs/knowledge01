@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>外贸专业知识百宝箱 · 全折叠版</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            theme: 'neutral',
+            flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' },
+            securityLevel: 'loose'
+        });
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(145deg, #f5f7fc 0%, #e6ecf5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            padding: 1.5rem;
+            color: #1e2f4d;
+        }
+        .master-card {
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(20,45,80,0.25);
+            width: 100%;
+            max-width: 1300px;
+            padding: 2rem;
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0f2b4f;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+        h1 span {
+            background: #1e3b5c;
+            color: white;
+            font-size: 0.9rem;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+        }
+        .sub {
+            font-size: 0.95rem;
+            color: #3e5f7a;
+            margin-bottom: 1.8rem;
+            border-left: 4px solid #2b5797;
+            padding-left: 1rem;
+        }
+        .query-accordion { display: flex; flex-direction: column; gap: 0.8rem; }
+        .query-card {
+            background: rgba(255,255,255,0.9);
+            border-radius: 1.2rem;
+            border: 1px solid rgba(200,220,240,0.8);
+            overflow: hidden;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 1rem 1.2rem;
+            background: rgba(255,255,255,0.8);
+            transition: background 0.2s;
+        }
+        .card-header:hover { background: rgba(230,240,250,0.8); }
+        .card-header h2 { font-size: 1.2rem; font-weight: 600; color: #1e3b5c; display: flex; align-items: center; gap: 0.5rem; }
+        .accordion-icon { font-size: 1rem; color: #1e3b5c; transition: transform 0.2s; }
+        .card-content { display: none; padding: 1rem 1.2rem 1.5rem; border-top: 1px solid #e0ecf5; }
+        .query-card.expanded .card-content { display: block; }
+        .query-card.expanded .accordion-icon { transform: rotate(180deg); }
+        .select-box { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+        .select-box select {
+            flex: 1; padding: 0.6rem 1rem; border: 1px solid #c0d4e5; border-radius: 2rem;
+            font-size: 0.9rem; background: white; cursor: pointer;
+        }
+        .select-box button {
+            background: #1e3b5c; border: none; color: white; padding: 0.6rem 1.2rem;
+            border-radius: 2rem; font-weight: 500; cursor: pointer;
+        }
+        .select-box button:hover { background: #2b5797; }
+        .result-box {
+            background: rgba(255,255,255,0.8); border-radius: 1rem; padding: 1rem;
+            border: 1px solid #c5d8e8; font-size: 0.9rem; line-height: 1.5;
+            max-height: 250px; overflow-y: auto;
+        }
+        .result-box .not-found { color: #8a9db0; font-style: italic; }
+        .highlight { font-weight: 600; color: #1e3b5c; }
+        .time-info {
+            background: rgba(255,245,220,0.5); border-left: 4px solid #e67e22;
+            padding: 0.5rem; border-radius: 0.5rem; margin: 0.5rem 0;
+        }
+        .diagram-box, .formula-box {
+            margin-top: 1rem; padding: 1rem; background: #f8fafd;
+            border-radius: 1rem; border: 1px solid #c5d8e8;
+        }
+        .diagram-title, .formula-title { font-weight: 700; color: #1e3b5c; margin-bottom: 0.5rem; }
+        .diagram-content, .formula {
+            font-family: monospace; font-size: 0.8rem; line-height: 1.6;
+            white-space: pre-wrap; background: white; padding: 0.8rem; border-radius: 0.5rem;
+        }
+        .button-group { display: flex; gap: 0.8rem; margin-top: 1rem; flex-wrap: wrap; }
+        .action-btn {
+            background: #2b5797; border: none; color: white; padding: 0.4rem 1rem;
+            border-radius: 2rem; font-size: 0.8rem; cursor: pointer;
+        }
+        .action-btn:hover { background: #1e3b5c; }
+        .mermaid-wrapper {
+            background: white; border-radius: 1rem; padding: 1rem;
+            overflow-x: auto; min-height: 300px;
+        }
+        .footnote { margin-top: 1.5rem; text-align: center; color: #5f7e9c; font-size: 0.75rem; }
+        hr { margin: 1.5rem 0 1rem; border: none; border-top: 1px solid rgba(100,130,170,0.2); }
+        @media (max-width: 700px) {
+            .master-card { padding: 1.2rem; }
+            h1 { font-size: 1.4rem; }
+            .card-header h2 { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="master-card">
+    <h1>📦 外贸专业知识百宝箱<span>全流程·术语·邮件·谈判</span></h1>
+    <div class="sub">点击标题展开模块，快速查询术语、渠道、国家习俗、流程操作、单据模板、邮件模板及谈判技巧</div>
+
+    <div class="query-accordion" id="accordionContainer">
+        <!-- 术语模块 -->
+        <div class="query-card" id="card-term">
+            <div class="card-header"><h2>🔤 外贸专业术语（含示意图+计算公式）</h2><span class="accordion-icon">▼</span></div>
+            <div class="card-content">
+                <div class="select-box"><select id="termSelect"><option value="" disabled selected>— 请选择一个术语 —</option></select><button id="termSearchBtn">查询 →</button></div>
+                <div class="result-box" id="termResult"><p class="not-found">选择术语后点击查询</p></div>
+                <div id="termDiagram" class="diagram-box" style="display: none;"></div>
+                <div id="termFormula" class="formula-box" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- 渠道模块 -->
+        <div class="query-card" id="card-channel">
+            <div class="card-header"><h2>🤝 客户开发渠道</h2><span class="accordion-icon">▼</span></div>
+            <div class="card-content">
+                <div class="select-box"><select id="channelSelect"><option value="" disabled selected>— 请选择一个渠道 —</option></select><button id="channelSearchBtn">查询 →</button></div>
+                <div class="result-box" id="channelResult"><p class="not-found">选择渠道后点击查询</p></div>
+            </div>
+        </div>
+
+        <!-- 国家模块 -->
+        <div class="query-card" id="card-country">
+            <div class="card-header"><h2>🌍 客户关系管理</h2><span class="accordion-icon">▼</span></div>
+            <div class="card-content">
+                <div class="select-box"><select id="countrySelect"><option value="" disabled selected>— 请选择国家/地区 —</option></select><button id="countrySearchBtn">查询 →</button></div>
+                <div class="result-box" id="countryResult"><p class="not-found">选择国家后点击查询当地习俗与当前时间</p></div>
+            </div>
+        </div>
+
+        <!-- 邮件模板模块 -->
+        <div class="query-card" id="card-unreply">
+            <div class="card-header"><h2>📩 客户已读不回（邮件模板）</h2><span class="accordion-icon">▼</span></div>
+            <div class="card-content">
+                <div class="select-box"><select id="unreplySelect"><option value="" disabled selected>— 请选择一个模板 —</option></select><button id="unreplySearchBtn">查询 →</button></div>
+                <div class="result-box" id="unreplyResult"><p class="not-found">选择模板后点击查询</p></div>
+                <div class="button-group"><button class="action-btn copy-btn" id="copyUnreplyBtn" style="display: none;">📋 复制模板</button></div>
+            </div>
+        </div>
+
+        <!-- 谈判技巧模块 -->
+        <div class="query-card" id="card-negotiate">
+            <div class="card-header"><h2>💰 价格谈判技巧</h2><span class="accordion-icon">▼</span></div>
+            <div class="card-content">
+                <div class="select-box"><select id="negotiateSelect"><option value="" disabled selected>— 请选择一种话术 —</option></select><button id="negotiateSearchBtn">查询 →</button></div>
+                <div class="result-box" id="negotiateResult"><p class="not-found">选择话术后点击查询</p></div>
+                <div class="button-group"><button class="action-btn copy-btn" id="copyNegotiateBtn" style="display: none;">📋 复制话术</button></div>
+            </div>
+        </div>
+
+        <!-- 流程模块 -->
+        <div class="query-card" id="card-process">
+            <div class="card-header"><h2>📋 外贸流程明细</h2><span class="accordion-icon">▼</span></div>
+            <div class="card-content">
+                <div class="select-box"><select id="processSelect"><option value="" disabled selected>— 请选择一个环节 —</option></select><button id="processSearchBtn">查询 →</button></div>
+                <div class="result-box" id="processResult"><p class="not-found">选择环节后点击查询详细操作</p></div>
+            </div>
+        </div>
+
+        <!-- 单据模板模块 -->
+        <div class="query-card" id="card-doc">
+            <div class="card-header"><h2>📄 外贸单据模板</h2><span class="accordion-icon">▼</span></div>
+            <div class="card-content">
+                <div class="select-box"><select id="docSelect"><option value="" disabled selected>— 请选择一个单据类型 —</option></select><button id="docSearchBtn">查询 →</button></div>
+                <div class="result-box" id="docResult"><p class="not-found">选择单据后点击查询查看表格模板</p></div>
+                <div class="button-group">
+                    <button class="action-btn copy-btn" id="copyTableBtn" style="display: none;">📋 复制表格</button>
+                    <button class="action-btn csv-btn" id="exportCsvBtn" style="display: none;">📥 下载CSV</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 流程图模块 -->
+        <div class="query-card" id="card-flow">
+            <div class="card-header"><h2>📋 外贸全套流程图</h2><span class="accordion-icon">▼</span></div>
+            <div class="card-content"><div class="mermaid-wrapper" id="mermaidWrapper"><div style="text-align:center; padding:20px;">点击展开后加载流程图</div></div></div>
+        </div>
+    </div>
+    <hr>
+    <div class="footnote">💡 点击标题展开/收起模块；术语库配有示意图和计算公式；国家信息含实时时间；邮件模板与谈判技巧均带复制按钮</div>
+</div>
+
+<script>
+(function() {
+    // ========== 术语数据库（完整版） ==========
+    const termDatabase = {
+        'FOB': 'FOB (Free On Board) 装运港船上交货。卖方在指定装运港将货物交到买方指定的船上，即完成交货。风险在货物越过船舷时转移。适用于海运或内河运输。',
+        'CIF': 'CIF (Cost, Insurance and Freight) 成本加保险费加运费。卖方负责租船订舱、支付运费、购买保险，并承担货物越过船舷前的风险。',
+        'CFR': 'CFR (Cost and Freight) 成本加运费。卖方负责租船订舱、支付运费，但保险由买方负责。',
+        'EXW': 'EXW (Ex Works) 工厂交货。卖方在自己的场所将货物交给买方，即完成交货，买方承担所有费用和风险。',
+        'DDP': 'DDP (Delivered Duty Paid) 完税后交货。卖方负责将货物运至指定目的地，并办理进口清关，承担所有风险和费用。',
+        'L/C': 'L/C (Letter of Credit) 信用证。银行根据买方请求，开给卖方的一种保证付款的书面凭证。',
+        'T/T': 'T/T (Telegraphic Transfer) 电汇。买方通过银行将货款电汇给卖方，常用于定金或尾款支付。',
+        'B/L': 'B/L (Bill of Lading) 提单。货物收据、运输合同证明、物权凭证，是海运中最重要的单据。',
+        'FCL': 'FCL (Full Container Load) 整箱货。一个集装箱只装一个货主的货物。',
+        'LCL': 'LCL (Less than Container Load) 拼箱货。多个货主的货物拼在一个集装箱内。',
+        'HS Code': 'HS Code (Harmonized System Code) 海关编码，用于商品分类和关税征收。',
+        'Incoterms': 'Incoterms 国际贸易术语解释通则，规定了国际贸易中双方应承担的责任、费用和风险。'
+    };
+
+    // 示意图数据库
+    const diagramDatabase = {
+        'FOB': `<div class="diagram-title">🚢 FOB 装运港船上交货</div><div class="diagram-content">🏭 卖方工厂 ⬇️ (内陆运输) ⚓ 装运港码头 ⬇️ 🚢 【大船】 ⬆️ (货物越过船舷) 📍 ▶ 风险转移点 ◀ ⬇️ 🌍 目的港</div>`,
+        'CIF': `<div class="diagram-title">🚢 CIF 成本+保险+运费</div><div class="diagram-content">🏭 卖方工厂 ⬇️ 🚢 【大船】 + 💰 保险 ⬇️ 📍 风险转移点 ⬇️ 🌍 目的港</div>`,
+        'EXW': `<div class="diagram-title">🏭 EXW 工厂交货</div><div class="diagram-content">🏭 卖方工厂 📍 ◀ 买方来提货 ▶ ⬇️ 🚛 买方运输 ⬇️ 🚢 买方装船</div>`,
+        'L/C': `<div class="diagram-title">🏦 L/C 信用证流程</div><div class="diagram-content">买方 →①申请→ 开证行 ⬇️ ②开证 通知行 →③通知→ 卖方 ⬇️ ④发货 🚢 ⬇️ ⑤交单 议付行 →⑥寄单→ 开证行 ⬇️ ⑦付款 💰 买方</div>`
+    };
+
+    // 计算公式数据库
+    const formulaDatabase = {
+        'FOB': `<div class="formula-title">🧮 FOB 价格计算公式</div><div class="formula">FOB = 出厂价 + 国内费用 + 预期利润</div><div class="example">【示例】出厂价100元，国内费用20元，利润率10% = 130元</div>`,
+        'CIF': `<div class="formula-title">🧮 CIF 价格计算公式</div><div class="formula">CIF = (FOB + 国际运费) / [1 - 保险费率 × 1.1]</div>`
+    };
+
+    // 渠道数据库
+    const channelDatabase = {
+        'B2B平台': 'B2B平台如阿里巴巴国际站、中国制造网、环球资源等。建立公司主页，发布产品，主动联系询盘。',
+        '展会': '参加国内外行业展会（如广交会），现场展示产品，交换名片，会后跟进。',
+        '社交媒体': '利用LinkedIn、Facebook等社交平台，建立专业账号，加入行业群组。',
+        '海关数据': '购买或使用海关数据，分析目标市场进口商，直接联系采购负责人。'
+    };
+
+    // 国家习俗数据库
+    const countryDatabase = {
+        '日本': { timezone: 9, business: '日本人注重礼仪和等级制度，决策需层层审批。', taboo: '忌数字“4”和“9”。' },
+        '美国': { timezone: -4, business: '美国人直率高效，珍惜时间，喜欢速战速决。', taboo: '避免询问年龄、收入等隐私。' },
+        '德国': { timezone: 2, business: '德国人严谨规范，注重效率，追求品质。', taboo: '忌谈论战争、政治等敏感话题。' },
+        '印度': { timezone: 5.5, business: '印度人重视人际关系，避免直接说“NO”。', taboo: '忌用左手传递东西。' },
+        '法国': { timezone: 2, business: '法国人浪漫健谈，时间观念不强。', taboo: '忌数字“13”。' }
+    };
+
+    // 流程数据库
+    const processDatabase = {
+        '询盘 Inquiry': '询盘是买卖双方初次接触，买方通过邮件、B2B平台等方式向卖方询问产品信息、价格等。操作指导：及时回复，了解客户背景。',
+        '发盘 Offer': '发盘是卖方向买方提出的具体交易条件。操作指导：确保内容完整，明确有效期。',
+        '签订合同': '签订正式销售合同。操作指导：使用标准合同模板，双方盖章签字。',
+        '租船订舱': '向船公司或货代预订舱位。操作指导：提供货物信息，获取订舱确认。',
+        '出口报关': '向海关申报货物出口。操作指导：准备报关单、发票、装箱单等。'
+    };
+
+    // 邮件模板数据库
+    const unreplyDatabase = {
+        '📩 第一封：礼貌提醒': 'Subject: Following up on our previous conversation\n\nDear [Client],\n\nI hope this email finds you well. I’m writing to follow up on my previous email.\n\nBest regards,\n[Your Name]',
+        '📩 第二封：提供价值': 'Subject: A quick resource for you\n\nDear [Client],\n\nI came across this article and thought it might be valuable for you.\n\nBest,\n[Your Name]'
+    };
+
+    // 谈判技巧数据库
+    const negotiateDatabase = {
+        '💬 客户说太贵时': '话术：我理解您的考虑。能否告诉我，您是觉得我们的价格超出了预算，还是与其他供应商相比有差距？',
+        '💬 客户说其他家更便宜': '话术：价格确实是一个重要因素，但我也建议您比较一下我们的售后/质量/服务。'
+    };
+
+    // 单据模板数据库
+    const docDatabase = {
+        '形式发票 (Proforma Invoice)': {
+            title: '形式发票 PROFORMA INVOICE',
+            headers: ['品名', '数量', '单价', '总价'],
+            rows: [['', '', '', ''], ['', '', '', '']],
+            extra: ['卖方签字：____________________']
+        },
+        '商业发票 (Commercial Invoice)': {
+            title: 'COMMERCIAL INVOICE',
+            headers: ['品名', '数量', '单价', '总价'],
+            rows: [['', '', '', '']],
+            extra: ['卖方签字：____________________']
+        }
+    };
+
+    // DOM 元素
+    const termSelect = document.getElementById('termSelect');
+    const channelSelect = document.getElementById('channelSelect');
+    const countrySelect = document.getElementById('countrySelect');
+    const processSelect = document.getElementById('processSelect');
+    const docSelect = document.getElementById('docSelect');
+    const unreplySelect = document.getElementById('unreplySelect');
+    const negotiateSelect = document.getElementById('negotiateSelect');
+
+    // 填充下拉框
+    function populateSelect(selectId, data) {
+        const select = document.getElementById(selectId);
+        if (!select) return;
+        Object.keys(data).forEach(key => {
+            const option = document.createElement('option');
+            option.value = key;
+            option.textContent = key;
+            select.appendChild(option);
+        });
+    }
+
+    // 查询函数
+    function searchTerm() {
+        const selected = termSelect.value;
+        const resultDiv = document.getElementById('termResult');
+        const diagramDiv = document.getElementById('termDiagram');
+        const formulaDiv = document.getElementById('termFormula');
+        if (!selected) { resultDiv.innerHTML = '<p class="not-found">请先选择一个术语</p>'; return; }
+        resultDiv.innerHTML = `<p><span class="highlight">${selected}</span>: ${termDatabase[selected]}</p>`;
+        diagramDiv.innerHTML = diagramDatabase[selected] || '';
+        diagramDiv.style.display = diagramDatabase[selected] ? 'block' : 'none';
+        formulaDiv.innerHTML = formulaDatabase[selected] || '';
+        formulaDiv.style.display = formulaDatabase[selected] ? 'block' : 'none';
+    }
+
+    function searchChannel() {
+        const selected = channelSelect.value;
+        const resultDiv = document.getElementById('channelResult');
+        if (!selected) { resultDiv.innerHTML = '<p class="not-found">请先选择一个渠道</p>'; return; }
+        resultDiv.innerHTML = `<p><span class="highlight">${selected}</span>: ${channelDatabase[selected]}</p>`;
+    }
+
+    function searchCountry() {
+        const selected = countrySelect.value;
+        const resultDiv = document.getElementById('countryResult');
+        if (!selected) { resultDiv.innerHTML = '<p class="not-found">请先选择一个国家</p>'; return; }
+        const info = countryDatabase[selected];
+        const now = new Date();
+        const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+        const localTime = new Date(utc + (3600000 * info.timezone));
+        resultDiv.innerHTML = `<p><span class="highlight">${selected}</span></p><div class="time-info">⏰ 当地时间：${localTime.toLocaleString()}</div><p>${info.business || ''}</p><p>⚠️ ${info.taboo || ''}</p>`;
+    }
+
+    function searchProcess() {
+        const selected = processSelect.value;
+        const resultDiv = document.getElementById('processResult');
+        if (!selected) { resultDiv.innerHTML = '<p class="not-found">请先选择一个环节</p>'; return; }
+        resultDiv.innerHTML = `<p><span class="highlight">${selected}</span><br>${processDatabase[selected]}</p>`;
+    }
+
+    function searchUnreply() {
+        const selected = unreplySelect.value;
+        const resultDiv = document.getElementById('unreplyResult');
+        const copyBtn = document.getElementById('copyUnreplyBtn');
+        if (!selected) { resultDiv.innerHTML = '<p class="not-found">请先选择一个模板</p>'; copyBtn.style.display = 'none'; return; }
+        resultDiv.innerHTML = `<p><span class="highlight">${selected}</span></p><p>${unreplyDatabase[selected].replace(/\n/g, '<br>')}</p>`;
+        copyBtn.style.display = 'inline-flex';
+        copyBtn.onclick = () => { navigator.clipboard.writeText(unreplyDatabase[selected]); alert('已复制'); };
+    }
+
+    function searchNegotiate() {
+        const selected = negotiateSelect.value;
+        const resultDiv = document.getElementById('negotiateResult');
+        const copyBtn = document.getElementById('copyNegotiateBtn');
+        if (!selected) { resultDiv.innerHTML = '<p class="not-found">请先选择一种话术</p>'; copyBtn.style.display = 'none'; return; }
+        resultDiv.innerHTML = `<p><span class="highlight">${selected}</span></p><p>${negotiateDatabase[selected]}</p>`;
+        copyBtn.style.display = 'inline-flex';
+        copyBtn.onclick = () => { navigator.clipboard.writeText(negotiateDatabase[selected]); alert('已复制'); };
+    }
+
+    function searchDoc() {
+        const selected = docSelect.value;
+        const resultDiv = document.getElementById('docResult');
+        const copyBtn = document.getElementById('copyTableBtn');
+        const csvBtn = document.getElementById('exportCsvBtn');
+        if (!selected) { resultDiv.innerHTML = '<p class="not-found">请先选择一个单据类型</p>'; copyBtn.style.display = 'none'; csvBtn.style.display = 'none'; return; }
+        const doc = docDatabase[selected];
+        let html = `<div style="font-weight:bold; text-align:center;">${doc.title}</div><table border="1" cellpadding="6" style="margin:10px auto; border-collapse:collapse;">`;
+        html += '<thead><tr>' + doc.headers.map(h => `<th>${h}</th>`).join('') + '</thead><tbody>';
+        doc.rows.forEach(row => { html += '<tr>' + row.map(c => `<td>${c}</td>`).join('') + '</tr>'; });
+        html += `</tbody></table>${doc.extra.map(l => `<div>${l}</div>`).join('')}`;
+        resultDiv.innerHTML = html;
+        copyBtn.style.display = 'inline-flex';
+        csvBtn.style.display = 'inline-flex';
+        copyBtn.onclick = () => { navigator.clipboard.writeText(resultDiv.innerText); alert('已复制'); };
+        csvBtn.onclick = () => {
+            let csv = doc.title + '\n\n' + doc.headers.join(',') + '\n';
+            doc.rows.forEach(row => { csv += row.map(c => `"${c}"`).join(',') + '\n'; });
+            const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `${selected}.csv`;
+            link.click();
+        };
+    }
+
+    // 绑定事件
+    document.getElementById('termSearchBtn')?.addEventListener('click', searchTerm);
+    document.getElementById('channelSearchBtn')?.addEventListener('click', searchChannel);
+    document.getElementById('countrySearchBtn')?.addEventListener('click', searchCountry);
+    document.getElementById('processSearchBtn')?.addEventListener('click', searchProcess);
+    document.getElementById('unreplySearchBtn')?.addEventListener('click', searchUnreply);
+    document.getElementById('negotiateSearchBtn')?.addEventListener('click', searchNegotiate);
+    document.getElementById('docSearchBtn')?.addEventListener('click', searchDoc);
+
+    // 填充下拉框
+    populateSelect('termSelect', termDatabase);
+    populateSelect('channelSelect', channelDatabase);
+    populateSelect('countrySelect', countryDatabase);
+    populateSelect('processSelect', processDatabase);
+    populateSelect('unreplySelect', unreplyDatabase);
+    populateSelect('negotiateSelect', negotiateDatabase);
+    populateSelect('docSelect', docDatabase);
+
+    // 手风琴功能
+    function initAccordion() {
+        const cards = document.querySelectorAll('.query-card');
+        cards.forEach((card, idx) => {
+            const header = card.querySelector('.card-header');
+            const content = card.querySelector('.card-content');
+            const icon = card.querySelector('.accordion-icon');
+            if (idx === 0) {
+                card.classList.add('expanded');
+                if (content) content.style.display = 'block';
+            } else {
+                card.classList.remove('expanded');
+                if (content) content.style.display = 'none';
+            }
+            header.addEventListener('click', () => {
+                const isExpanded = card.classList.contains('expanded');
+                if (isExpanded) {
+                    card.classList.remove('expanded');
+                    content.style.display = 'none';
+                } else {
+                    cards.forEach(c => {
+                        c.classList.remove('expanded');
+                        const cContent = c.querySelector('.card-content');
+                        if (cContent) cContent.style.display = 'none';
+                    });
+                    card.classList.add('expanded');
+                    content.style.display = 'block';
+                    if (card.id === 'card-flow' && !window.flowRendered) {
+                        window.flowRendered = true;
+                        const wrapper = document.getElementById('mermaidWrapper');
+                        if (wrapper) {
+                            const pre = document.createElement('pre');
+                            pre.className = 'mermaid';
+                            pre.textContent = `graph TD\n    A["询盘"] --> B["发盘"]\n    B --> C{"还盘?"}\n    C -->|是| B\n    C -->|否| D["接受"]\n    D --> E["签订合同"]\n    E --> F["备货"]\n    F --> G["订舱"]\n    G --> H["报关"]\n    H --> I["装船"]\n    I --> J["结汇"]\n    J --> K["提货"]`;
+                            wrapper.innerHTML = '';
+                            wrapper.appendChild(pre);
+                            if (typeof mermaid !== 'undefined') mermaid.run({ nodes: [pre] });
+                        }
+                    }
+                }
+            });
+        });
+    }
+    initAccordion();
+
+    // 隐藏初始按钮
+    document.getElementById('copyUnreplyBtn').style.display = 'none';
+    document.getElementById('copyNegotiateBtn').style.display = 'none';
+    document.getElementById('copyTableBtn').style.display = 'none';
+    document.getElementById('exportCsvBtn').style.display = 'none';
+})();
+</script>
+</body>
+</html>
