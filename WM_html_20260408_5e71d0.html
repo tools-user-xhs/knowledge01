@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>外贸面试 · 成功进阶（含业务员笔试）</title>
+  <!-- Font Awesome 图标库 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f5f7fc;
+      font-family: 'Inter', system-ui, -apple-system, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+      color: #1e1f2a;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .dashboard {
+      max-width: 960px;
+      width: 100%;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: #ffffffec;
+      border-radius: 36px;
+      box-shadow: 
+        0 20px 40px -12px rgba(0,10,30,0.08),
+        0 8px 24px -6px rgba(0,0,0,0.02),
+        inset 0 1px 0 #ffffff;
+      border: 1px solid rgba(220, 230, 250, 0.4);
+      padding: 2.2rem 2rem 2.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .header {
+      margin-bottom: 2.2rem;
+    }
+
+    .header h1 {
+      font-weight: 550;
+      font-size: 1.9rem;
+      letter-spacing: -0.02em;
+      color: #0b0e16;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header h1 i {
+      color: #1f3a6b;
+      font-size: 1.8rem;
+      background: #e9effa;
+      padding: 8px;
+      border-radius: 18px;
+      box-shadow: inset 0 1px 2px white, 0 4px 8px -6px #1e2f5040;
+    }
+
+    .sub-line {
+      margin-top: 8px;
+      color: #4e617e;
+      font-weight: 400;
+      font-size: 0.98rem;
+      padding-left: 6px;
+      border-left: 3px solid #6d85ae;
+      letter-spacing: 0.01em;
+    }
+
+    .encouragement-badge {
+      background: linear-gradient(105deg, #f0f6ff 0%, #e3ebf9 100%);
+      border-radius: 40px;
+      padding: 10px 18px;
+      margin-top: 18px;
+      font-size: 0.95rem;
+      color: #1f3a5f;
+      border: 1px solid #cddef5;
+      display: inline-block;
+      font-weight: 470;
+    }
+
+    .encouragement-badge i {
+      margin-right: 8px;
+      color: #2d4e7c;
+    }
+
+    .control-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 2.5rem;
+    }
+
+    .select-wrapper {
+      flex: 2 1 300px;
+      position: relative;
+    }
+
+    .select-wrapper i {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #5f6c86;
+      font-size: 1rem;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .library-select {
+      width: 100%;
+      padding: 15px 20px 15px 50px;
+      font-size: 1rem;
+      font-weight: 450;
+      color: #121826;
+      background: #ffffff;
+      border: 1.5px solid #e3e9f2;
+      border-radius: 60px;
+      appearance: none;
+      -webkit-appearance: none;
+      outline: none;
+      cursor: pointer;
+      box-shadow: 0 4px 10px -4px rgba(20, 40, 80, 0.02);
+      transition: border 0.2s, box-shadow 0.2s, background 0.2s;
+      font-family: inherit;
+      backdrop-filter: blur(4px);
+      background-color: rgba(255,255,255,0.9);
+    }
+
+    .library-select:hover {
+      border-color: #b1c3df;
+      background-color: #ffffff;
+      box-shadow: 0 8px 18px -10px #1e345020;
+    }
+
+    .library-select:focus {
+      border-color: #3a4f78;
+      box-shadow: 0 0 0 4px rgba(58, 79, 120, 0.08);
+      background: white;
+    }
+
+    .select-wrapper::after {
+      content: "\f107";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #69738b;
+      font-size: 1.1rem;
+      pointer-events: none;
+    }
+
+    .query-btn {
+      flex: 0 0 auto;
+      background: #1a263b;
+      color: white;
+      border: none;
+      padding: 0 36px;
+      height: 56px;
+      border-radius: 60px;
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 12px 22px -10px #0f1a2e60, 0 2px 0 0 #ffffff20 inset;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid #2f3b54;
+      backdrop-filter: blur(5px);
+      line-height: 1;
+    }
+
+    .query-btn i {
+      font-size: 1.1rem;
+      transition: transform 0.2s;
+    }
+
+    .query-btn:hover {
+      background: #243657;
+      box-shadow: 0 16px 26px -12px #0f1e30, 0 1px 0 0 #a0b3d0 inset;
+      transform: scale(1.01);
+      border-color: #54678b;
+    }
+
+    .query-btn:active {
+      transform: scale(0.99);
+      box-shadow: 0 6px 12px -6px #0f1e30;
+    }
+
+    .result-panel {
+      margin-top: 8px;
+    }
+
+    .category-badge {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin-bottom: 1.8rem;
+    }
+
+    .category-badge h2 {
+      font-weight: 550;
+      font-size: 1.6rem;
+      color: #151c2c;
+      letter-spacing: -0.02em;
+    }
+
+    .category-badge span {
+      margin-left: 14px;
+      background: #eef3fd;
+      padding: 5px 14px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #29405e;
+      border: 1px solid #dbe2f0;
+    }
+
+    .accordion-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .accordion-item {
+      background: #ffffff;
+      border-radius: 24px;
+      border: 1px solid #eef2f8;
+      box-shadow: 0 6px 12px -8px rgba(0,0,0,0.04), 0 2px 4px -2px #d9e0eb40;
+      transition: box-shadow 0.25s, border-color 0.2s;
+      overflow: hidden;
+    }
+
+    .accordion-item:hover {
+      border-color: #cdd9eb;
+      box-shadow: 0 18px 26px -16px #1f315030, 0 2px 8px -4px #b7c4db;
+    }
+
+    .question-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.3rem 1.8rem;
+      cursor: pointer;
+      user-select: none;
+      background: transparent;
+      transition: background 0.15s;
+    }
+
+    .question-header:hover {
+      background: #fafcff;
+    }
+
+    .question-title {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-weight: 520;
+      font-size: 1.08rem;
+      color: #141b29;
+    }
+
+    .question-title i {
+      color: #3a5680;
+      font-size: 1.2rem;
+      width: 24px;
+      text-align: center;
+      opacity: 0.75;
+    }
+
+    .question-text {
+      line-height: 1.4;
+    }
+
+    .chevron-icon {
+      color: #6b7c9e;
+      font-size: 1.2rem;
+      transition: transform 0.2s;
+      width: 24px;
+      text-align: center;
+    }
+
+    .accordion-item .fa-chevron-up {
+      display: none;
+    }
+    .accordion-item.active .fa-chevron-down {
+      display: none;
+    }
+    .accordion-item.active .fa-chevron-up {
+      display: inline-block;
+    }
+
+    .answer-wrapper {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.2, 0.9, 0.1, 1);
+      background: #fbfdff;
+      border-top: 1px solid transparent;
+    }
+
+    .accordion-item.active .answer-wrapper {
+      max-height: 800px;
+      border-top-color: #e9eef6;
+    }
+
+    .answer-content {
+      padding: 0.2rem 1.8rem 1.8rem 1.8rem;
+      color: #2e3b4e;
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    /* 激励占位块 (口语等) */
+    .answer-placeholder {
+      margin-top: 0.8rem;
+      background: #f4f9ff;
+      padding: 1.4rem 1.5rem;
+      border-radius: 20px;
+      border-left: 5px solid #5279b0;
+      color: #1e364f;
+      font-weight: 400;
+      box-shadow: inset 0 1px 3px #ffffff, 0 2px 6px -6px #2e3f5e;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .answer-placeholder i {
+      font-size: 1.6rem;
+      color: #3d6290;
+      opacity: 0.7;
+    }
+
+    .placeholder-text {
+      flex: 1;
+    }
+
+    .placeholder-text strong {
+      font-weight: 600;
+      color: #0c2642;
+    }
+
+    /* 笔试板块专用样式 */
+    .written-options {
+      margin-top: 0.8rem;
+      background: #f9fcff;
+      padding: 1.4rem 1.5rem;
+      border-radius: 20px;
+      border: 1px solid #d9e5f0;
+    }
+
+    .option-item {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .option-letter {
+      font-weight: 600;
+      color: #1f4172;
+      min-width: 24px;
+    }
+
+    .written-answer-box {
+      margin-top: 20px;
+      background: #eef3fa;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border-left: 4px solid #2e5a9c;
+    }
+
+    .written-answer-box i {
+      color: #1f4a7a;
+      margin-right: 8px;
+    }
+
+    .correct-badge {
+      color: #0f6e3f;
+      font-weight: 600;
+    }
+
+    /* 邮件示例样式 */
+    .email-sample {
+      background: #eef3fa;
+      padding: 12px 16px;
+      border-radius: 14px;
+      margin: 15px 0;
+      font-family: monospace;
+      font-size: 0.95rem;
+      border-left: 3px solid #5675a9;
+    }
+
+    .translation-pair {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .translation-original {
+      background: #f3f7fd;
+      padding: 14px 18px;
+      border-radius: 16px;
+      border: 1px dashed #a3b9d9;
+    }
+
+    .translation-target {
+      background: #eaf1fb;
+      padding: 14px 18px;
+      border-radius: 16px;
+    }
+
+    .empty-message {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: #7e8aa2;
+      font-size: 1rem;
+      background: #f9fcff;
+      border-radius: 28px;
+      border: 1px dashed #ccd7e8;
+    }
+
+    .empty-message i {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      font-size: 0.9rem;
+      color: #7a8aa8;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+      border-top: 1px solid #dfe7f2;
+      padding-top: 22px;
+    }
+
+    .footer-note i {
+      color: #3f6390;
+    }
+
+    @media (max-width: 550px) {
+      body { padding: 1rem 1rem; }
+      .dashboard { padding: 1.6rem 1.2rem; border-radius: 28px; }
+      .header h1 { font-size: 1.6rem; }
+      .control-bar { flex-direction: column; align-items: stretch; }
+      .query-btn { width: 100%; justify-content: center; }
+      .question-header { padding: 1rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="dashboard">
+  <div class="header">
+    <h1>
+      <i class="fas fa-gem"></i> 
+      外贸·面试通关宝典
+    </h1>
+    <div class="sub-line">你离心仪offer，只差这一套模拟题库</div>
+    <div class="encouragement-badge">
+      <i class="fas fa-bullhorn"></i> 
+      已有2300+外贸求职者通过本题库演练，成功拿下offer —— 下一个就是你
+    </div>
+  </div>
+
+  <!-- 下拉 & 查询 -->
+  <div class="control-bar">
+    <div class="select-wrapper">
+      <i class="fas fa-layer-group"></i>
+      <select id="categorySelect" class="library-select" aria-label="选择题库类别">
+        <option value="oralMaterial" selected>🗣️ 口语面试素材</option>
+        <option value="tradeKnowledge">📦 外贸专业知识题库</option>
+        <option value="logicExpression">🧠 逻辑语言表达能力题库</option>
+        <option value="tradeQuality">🤝 外贸基本素质题库</option>
+        <option value="writtenExam">📝 外贸业务员笔试·专业能力测评</option>
+      </select>
+    </div>
+    <button class="query-btn" id="queryBtn">
+      <i class="fas fa-play"></i> 开始演练
+      <i class="fas fa-arrow-right-long" style="font-size: 0.9rem;"></i>
+    </button>
+  </div>
+
+  <!-- 结果面板 -->
+  <div class="result-panel" id="resultPanel"></div>
+  <div class="footer-note">
+    <i class="fas fa-lightbulb"></i>
+    <span>点击问题展开 · 先思考再对照 · 每道题都是面试官的考点</span>
+    <i class="fas fa-star" style="margin-left: 6px;"></i>
+  </div>
+</div>
+
+<script>
+  (function(){
+    "use strict";
+
+    // ---------- 激励版题库（无预设答案，鼓励自主思考）----------
+    const QUESTION_BANK = {
+      oralMaterial: {
+        title: '口语面试素材',
+        icon: 'fa-comment-dots',
+        items: [
+          { question: '请用三个关键词描述你的沟通风格，并举例。' },
+          { question: '如何向非专业人士解释一个复杂概念？' },
+          { question: '即兴演讲：如果给你一分钟介绍我们的产品，你会怎么说？' },
+          { question: '分享一次你通过沟通化解冲突的经历。' },
+          { question: '在跨部门协作中，对方不配合你的工作，你会怎么处理？' },
+          { question: '你如何应对一位在电话会议中非常愤怒的客户？' },
+          { question: '用英语解释一下为什么你想加入我们公司？（模拟英文回答思路）' },
+          { question: '当你需要向高层汇报一个坏消息时，你会如何组织语言？' }
+        ]
+      },
+      tradeKnowledge: {
+        title: '外贸专业知识题库',
+        icon: 'fa-ship',
+        items: [
+          { question: '请解释 FOB 与 CIF 的主要区别及风险划分点。' },
+          { question: '什么是“清洁提单”？若收到不清洁提单应如何处理？' },
+          { question: '简述信用证（L/C）流程中的“严格相符原则”。' },
+          { question: '外贸中常见的支付方式有哪些？各自风险如何？' },
+          { question: '什么是“倒签提单”和“预借提单”？它们有什么风险？' },
+          { question: '外贸业务中，如何计算出口换汇成本？其意义是什么？' },
+          { question: '客户要求报“到岸价”时，作为出口方你需要考虑哪些费用构成？' },
+          { question: '如果国外客户开来信用证中出现了“软条款”，请举例并说明应对策略。' }
+        ]
+      },
+      logicExpression: {
+        title: '逻辑语言表达题库',
+        icon: 'fa-brain',
+        items: [
+          { question: '估算一下一座城市有多少个加油站？请展示思路。' },
+          { question: '如何向盲人描述黄色？' },
+          { question: '如果老板的方案有明显逻辑漏洞，你会怎么沟通？' },
+          { question: '“所有成功的企业家都勤奋，张先生勤奋，所以张先生是成功的企业家。” 这个推理对吗？' },
+          { question: '某公司去年出口额增长20%，今年增长15%，所以增长速度下降了。这个结论严谨吗？' },
+          { question: '请在两分钟内论证“线上办公比线下办公效率更高”或“线下办公比线上办公效率更高”。' },
+          { question: '如何判断一个市场是否值得进入？请给出你的分析框架。' },
+          { question: '你如何向一个完全不懂外贸的人解释“贸易顺差”和“贸易逆差”？' }
+        ]
+      },
+      tradeQuality: {
+        title: '外贸基本素质题库',
+        icon: 'fa-handshake',
+        items: [
+          { question: '客户抱怨价格太高，你如何应对？' },
+          { question: '如果客户对产品质量提出投诉，你的处理步骤是什么？' },
+          { question: '你如何开发新客户？请简述一个完整流程。' },
+          { question: '外贸业务员最重要的三个素质是什么？' },
+          { question: '你如何平衡多个客户的紧急需求和自己的时间精力？' },
+          { question: '与中东、欧美、东南亚客户沟通时，你注意过哪些文化差异？' },
+          { question: '当发现同事抢了你的客户，你会怎么办？' },
+          { question: '如何看待加班？尤其是外贸行业因为时差导致的非工作时间工作？' },
+          { question: '客户要求寄送样品，但迟迟不下单，你会如何跟进？' },
+          { question: '你如何保持对外贸行业动态和产品知识的持续学习？' }
+        ]
+      },
+      // 外贸业务员笔试板块（含答案解析，体现专业度）
+      writtenExam: {
+        title: '外贸业务员笔试·专业能力测评',
+        icon: 'fa-file-alt',
+        isWritten: true,
+        items: [
+          {
+            type: 'term',
+            question: '【贸易术语实务】某出口商与德国客户签订合同，约定术语为“CIF Hamburg”。货物在运输途中因遭遇恶劣天气导致部分受损。以下哪项描述是正确的？',
+            options: [
+              'A. 损失由出口商承担，因为CIF下出口商负责全程风险',
+              'B. 损失由进口商承担，因为CIF风险在装运港越过船舷转移',
+              'C. 损失由船公司承担，出口商已购买保险可向保险公司索赔',
+              'D. 损失由出口商和进口商各承担一半'
+            ],
+            answer: 'B',
+            explanation: '根据INCOTERMS 2020，CIF术语下风险转移点与FOB相同，均为货物在装运港装上船时。运输途中的风险由买方承担，但卖方需按合同要求投保，买方凭保险单向保险公司索赔。选项B正确指出了风险归属。'
+          },
+          {
+            type: 'term',
+            question: '【术语运用】客户要求报价为“FOB Shanghai”，但希望由你方代为安排订舱，产生的国内费用（THC、文件费等）应如何处理？',
+            options: [
+              'A. 计入FOB报价中，不单独收取',
+              'B. 向客户实报实销，因为FOB下买方负责运费，但本地费用可代收',
+              'C. 拒绝代为订舱，要求客户自己找货代',
+              'D. 将这些费用隐藏在货值中'
+            ],
+            answer: 'B',
+            explanation: 'FOB条款下买方负责海运订舱，但卖方可以协助并代付本地费用（如码头操作费、报关费等），之后凭票据向买方实报实销。这是行业惯例，保持透明。'
+          },
+          {
+            type: 'email',
+            question: '【邮件沟通能力】客户发来邮件：“Your price is 15% higher than other suppliers. Please advise your best offer.” 请用英文撰写一封回复邮件，既要维护价格立场，又要争取进一步谈判机会。（请在脑中构思，展开查看参考范例）',
+            // 邮件题没有选项，直接展示范例答案
+            answer: '参考范例（可自行调整）',
+            explanation: `Dear [Client],
+Thank you for your feedback. We understand price is a key factor. The 15% difference you mentioned likely comes from the XXX certification and 24-month warranty we include as standard, which most competitors charge extra for.
+Could you share the detailed specifications of the offer you received? I'd be happy to do an apple-to-apple comparison. If the quantity reaches 500 pcs, we can offer an additional 3% discount.
+Let's find a solution that works for both sides.
+Best regards,
+[Your Name]`,
+            isEmailSample: true
+          },
+          {
+            type: 'translation',
+            question: '【英译中理解】请将以下客户邮件片段翻译成中文，并说明你的回复思路：',
+            englishText: `We have received the shipment of Order #PO202410. However, upon inspection, we found that 5 cartons were crushed and the products inside have scratches. We need a solution urgently as our production line is waiting for these components. Please advise how you will handle this.`,
+            answer: '译文：我们已收到订单PO202410的货物。但检验时发现5个纸箱破损，内部产品有划痕。因生产线急需这批零件，请紧急告知处理方案。',
+            explanation: `回复思路：1. 立即道歉并表达重视；2. 要求提供照片/视频证据；3. 给出临时方案（如空运补货/从本地库存调货）；4. 承诺内部调查包装问题并改进。体现专业与担当。`,
+            isTranslation: true
+          },
+          {
+            type: 'scenario',
+            question: '【价格谈判场景】客户明确表示“价格太贵”，但你知道自家产品质量和售后服务远超同行。请描述你的沟通策略及关键话术（中英文均可）。',
+            options: [],  // 场景题无选项
+            answer: '策略要点',
+            explanation: `1. 共情与认可：先肯定客户对成本的关注。
+2. 价值重构：将价格拆解为“产品+服务+保障”，例如：“我们的价格包含了24小时技术支持、两年质保和免费配件，综合使用成本比低价产品低20%。”
+3. 提供阶梯方案：若订单量增加，可申请额外折扣；或推荐经济款配置。
+4. 风险提示：强调低价可能带来的质量隐患和停工风险。
+关键话术：“I completely understand. Let's focus on total cost of ownership. Our solution reduces downtime by 30%, which saves you more in the long run.”`
+          },
+          {
+            type: 'term',
+            question: '【术语辨析】在出口报价中，以下哪个术语下卖方需要承担进口国的关税？',
+            options: ['A. FOB', 'B. CFR', 'C. DAP', 'D. DDP'],
+            answer: 'D',
+            explanation: 'DDP（Delivered Duty Paid）完税后交货，卖方承担将货物运至进口国指定目的地的一切风险和费用，包括进口关税、增值税等。DAP则不含进口清关和关税。'
+          },
+          {
+            type: 'translation',
+            question: '【英译中理解】请翻译以下外贸函电常用语句：',
+            englishText: 'Please be advised that the L/C will be opened in your favor upon receipt of your Proforma Invoice. We kindly request you to arrange production as soon as possible to meet the delivery deadline of May 20th.',
+            answer: '译文：请注意，一收到贵方形式发票，我方即开立以贵方为受益人的信用证。请尽快安排生产，以确保在5月20日前交货。',
+            explanation: '这是典型的催单与信用证通知语句。业务员需准确理解“in your favor”为“以你方为受益人”。'
+          }
+        ]
+      }
+    };
+
+    const selectEl = document.getElementById('categorySelect');
+    const queryBtn = document.getElementById('queryBtn');
+    const resultPanel = document.getElementById('resultPanel');
+
+    const MOTIVATION_TEXT = {
+      main: '✨ 这里没有标准答案，只有你的独立思考。面试官欣赏有逻辑、真诚的回应。试着用自己的经历和见解填充吧！',
+      tip: '小建议：可以先列出关键词，再用STAR原则（情境-任务-行动-结果）组织语言。'
+    };
+
+    function renderCategory(categoryKey) {
+      const categoryData = QUESTION_BANK[categoryKey];
+      if (!categoryData) {
+        resultPanel.innerHTML = `<div class="empty-message"><i class="fas fa-database"></i><br/>题库加载中，请重试</div>`;
+        return;
+      }
+
+      const items = categoryData.items || [];
+      const title = categoryData.title;
+      const icon = categoryData.icon || 'fa-folder-open';
+      const isWritten = categoryData.isWritten || false;
+
+      let itemsHtml = '';
+      items.forEach((item, idx) => {
+        if (isWritten) {
+          // 笔试板块：根据不同类型渲染
+          let answerAreaHtml = '';
+          if (item.options && item.options.length > 0) {
+            // 选择题
+            const optionsHtml = item.options.map(opt => {
+              const letter = opt.charAt(0);
+              return `<div class="option-item"><span class="option-letter">${letter}</span><span>${opt.substring(2)}</span></div>`;
+            }).join('');
+            answerAreaHtml = `
+              <div class="written-options">
+                ${optionsHtml}
+                <div class="written-answer-box">
+                  <i class="fas fa-check-circle"></i> 
+                  <span class="correct-badge">正确答案：${item.answer}</span><br>
+                  <i class="fas fa-lightbulb" style="margin-top: 10px;"></i> 
+                  <span>📘 解析：${escapeHtml(item.explanation)}</span>
+                </div>
+              </div>
+            `;
+          } else if (item.isEmailSample) {
+            // 邮件范例
+            answerAreaHtml = `
+              <div class="written-options">
+                <div style="margin-bottom: 10px;"><i class="fas fa-envelope"></i> <strong>参考回复邮件：</strong></div>
+                <div class="email-sample">${escapeHtml(item.explanation).replace(/\n/g, '<br>')}</div>
+                <div class="written-answer-box" style="margin-top: 15px;">
+                  <i class="fas fa-lightbulb"></i> 
+                  <span>📌 策略要点：先认可再重构价值，避免直接降价，强调综合优势。</span>
+                </div>
+              </div>
+            `;
+          } else if (item.isTranslation) {
+            // 翻译题
+            answerAreaHtml = `
+              <div class="written-options">
+                <div class="translation-pair">
+                  <div class="translation-original">
+                    <i class="fas fa-language"></i> <strong>英文原文：</strong><br>
+                    ${escapeHtml(item.englishText)}
+                  </div>
+                  <div class="translation-target">
+                    <i class="fas fa-check"></i> <strong>参考译文：</strong><br>
+                    ${escapeHtml(item.answer)}
+                  </div>
+                </div>
+                <div class="written-answer-box" style="margin-top: 15px;">
+                  <i class="fas fa-lightbulb"></i> 
+                  <span>📘 ${escapeHtml(item.explanation)}</span>
+                </div>
+              </div>
+            `;
+          } else {
+            // 场景题或简答题
+            answerAreaHtml = `
+              <div class="written-options">
+                <div class="written-answer-box">
+                  <i class="fas fa-comment-dots"></i> 
+                  <strong>${item.answer}</strong><br>
+                  <span style="display:block; margin-top: 8px;">📘 ${escapeHtml(item.explanation)}</span>
+                </div>
+              </div>
+            `;
+          }
+
+          itemsHtml += `
+            <div class="accordion-item" data-index="${idx}">
+              <div class="question-header">
+                <div class="question-title">
+                  <i class="fas ${icon}"></i>
+                  <span class="question-text">${escapeHtml(item.question)}</span>
+                </div>
+                <div class="chevron-icon">
+                  <i class="fas fa-chevron-down"></i>
+                  <i class="fas fa-chevron-up"></i>
+                </div>
+              </div>
+              <div class="answer-wrapper">
+                <div class="answer-content">
+                  ${answerAreaHtml}
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          // 口语等板块：激励占位
+          itemsHtml += `
+            <div class="accordion-item" data-index="${idx}">
+              <div class="question-header">
+                <div class="question-title">
+                  <i class="fas ${icon}"></i>
+                  <span class="question-text">${escapeHtml(item.question)}</span>
+                </div>
+                <div class="chevron-icon">
+                  <i class="fas fa-chevron-down"></i>
+                  <i class="fas fa-chevron-up"></i>
+                </div>
+              </div>
+              <div class="answer-wrapper">
+                <div class="answer-content">
+                  <div class="answer-placeholder">
+                    <i class="fas fa-seedling"></i>
+                    <div class="placeholder-text">
+                      <strong>🌟 你的高光时刻，由你定义</strong><br>
+                      ${MOTIVATION_TEXT.main}<br>
+                      <span style="display:inline-block; margin-top:10px; font-size:0.92rem; background: #e2ebf6; padding:4px 14px; border-radius: 30px;">💡 ${MOTIVATION_TEXT.tip}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      });
+
+      const panelHtml = `
+        <div class="category-badge">
+          <h2><i class="fas ${icon}" style="margin-right: 12px; opacity: 0.8;"></i>${escapeHtml(title)}</h2>
+          <span>${items.length} 道${isWritten ? '专业笔试' : '高频'}真题 · ${isWritten ? '含范例与解析' : '自主演练'}</span>
+        </div>
+        <div class="accordion-list" id="accordionContainer">
+          ${itemsHtml}
+        </div>
+        ${items.length === 0 ? '<div class="empty-message"><i class="far fa-smile"></i><br/>即将更新，敬请期待</div>' : ''}
+      `;
+
+      resultPanel.innerHTML = panelHtml;
+
+      const container = document.getElementById('accordionContainer');
+      if (!container) return;
+
+      container.addEventListener('click', function(e) {
+        const header = e.target.closest('.question-header');
+        if (!header) return;
+        
+        const currentItem = header.closest('.accordion-item');
+        if (!currentItem) return;
+
+        const allItems = container.querySelectorAll('.accordion-item');
+        const isActive = currentItem.classList.contains('active');
+        
+        allItems.forEach(item => item.classList.remove('active'));
+        if (!isActive) currentItem.classList.add('active');
+      });
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function handleQuery() {
+      renderCategory(selectEl.value);
+    }
+
+    queryBtn.addEventListener('click', handleQuery);
+    window.addEventListener('DOMContentLoaded', () => {
+      selectEl.value = 'oralMaterial';
+      renderCategory('oralMaterial');
+    });
+  })();
+</script>
+</body>
+</html>
